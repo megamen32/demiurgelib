@@ -21,6 +21,10 @@ def try_geta(arr,func,skip_none=True,default_element=None):
         if x is None and skip_none: continue
         res.append(x)
     return res
+def try_get_attrs(obj_func, attrs:list, defaults:list,**kwargs):
+    obj = try_get(obj_func,**kwargs)
+    return tuple(getattr(obj, attr, default) if obj else default for attr, default in zip(attrs, defaults))
+
 def safe_lambda(lambd, default=None):
     res,err=safe_lambdae(lambd,default)
     return res
